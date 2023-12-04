@@ -1,12 +1,15 @@
-﻿using System.Text;
+﻿using System.Runtime.Serialization;
+using System.Text;
 
 namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     internal sealed class NotCriteria : Criteria
     {
+        [DataMember]
         private readonly Criteria Criteria;
 
-        public NotCriteria(Criteria criteria)
+        internal NotCriteria(Criteria criteria)
         {
             ANE.ThrowIfNull(criteria);
 

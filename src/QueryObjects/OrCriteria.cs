@@ -1,5 +1,8 @@
-﻿namespace GyoumuLib.QueryObjects
+﻿using System.Runtime.Serialization;
+
+namespace GyoumuLib.QueryObjects
 {
+    // OrCriteria はシリアライズされない。
     public sealed class OrCriteria : CompoundCriteriaBuilder<OrCriteria.OrOperator>
     {
         private readonly OrOperator _orop;

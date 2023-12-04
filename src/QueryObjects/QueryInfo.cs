@@ -1,17 +1,25 @@
-﻿namespace GyoumuLib.QueryObjects
+﻿using System.Runtime.Serialization;
+
+namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     public sealed class QueryInfo
     {
-        public AndCriteria Filter { get; } = new();
+        [DataMember]
+        public readonly AndCriteria Filter;
 
-        internal readonly List<SortInfo> SortList = new();
+        [DataMember]
+        internal readonly List<SortInfo> SortList;
 
+        [DataMember]
         public int StartRecord { get; set; }
 
+        [DataMember]
         public int MaxRecords { get; set; }
 
         private IEnumerable<string>? _selectColumns;
 
+        [DataMember]
         public IEnumerable<string>? SelectColumns
         {
             get => _selectColumns;
@@ -32,6 +40,25 @@
 
                 _selectColumns = value;
             }
+        }
+
+        public QueryInfo()
+        {
+            Filter = new();
+            SortList = new();
+        }
+
+        // for MessagePack
+        private QueryInfo(AndCriteria filter, List<SortInfo> sortList, int startRecord, int maxRecords, IEnumerable<string>? selectColumns)
+        {
+            ANE.ThrowIfNull(filter);
+            ANE.ThrowIfNull(sortList);
+
+            Filter = filter;
+            SortList = sortList;
+            StartRecord = startRecord;
+            MaxRecords = maxRecords;
+            SelectColumns = selectColumns;
         }
 
         public void AddSort(string columnName)

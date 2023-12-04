@@ -1,16 +1,29 @@
-﻿using System.Text;
+﻿using System.Runtime.Serialization;
+using System.Text;
 
 namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     internal sealed class CompoundCriteria : Criteria
     {
-        private readonly CompoundOperator Operator;
+        [DataMember]
+        internal readonly CompoundOperator Op;
+        [DataMember]
+        private readonly List<Criteria> Conditions;
 
-        private readonly List<Criteria> Conditions = new();
-
-        public CompoundCriteria(CompoundOperator op)
+        internal CompoundCriteria(CompoundOperator op)
         {
-            Operator = op;
+            Op = op;
+            Conditions = new();
+        }
+
+        // for MessagePack
+        private CompoundCriteria(CompoundOperator op, List<Criteria> conditions)
+        {
+            ANE.ThrowIfNull(conditions);
+
+            Op = op;
+            Conditions = conditions;
         }
 
         public void Add(Criteria criteria)
@@ -26,7 +39,7 @@ namespace GyoumuLib.QueryObjects
             if (count == 0)
                 return;
 
-            string op = Environment.NewLine + Operator switch
+            string op = Environment.NewLine + Op switch
             {
                 CompoundOperator.And => " AND ",
                 CompoundOperator.Or => " OR ",

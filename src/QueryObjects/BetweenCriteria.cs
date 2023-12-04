@@ -1,13 +1,17 @@
-﻿using System.Text;
+﻿using System.Runtime.Serialization;
+using System.Text;
 
 namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     internal sealed class BetweenCriteria : ColumnCriteria
     {
+        [DataMember]
         private readonly object StartValue;
+        [DataMember]
         private readonly object EndValue;
 
-        public BetweenCriteria(string columnName, object startValue, object endValue)
+        internal BetweenCriteria(string columnName, object startValue, object endValue)
             : base(columnName)
         {
             ANE.ThrowIfNull(startValue);

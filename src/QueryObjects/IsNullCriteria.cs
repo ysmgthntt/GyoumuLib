@@ -1,12 +1,15 @@
-﻿using System.Text;
+﻿using System.Runtime.Serialization;
+using System.Text;
 
 namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     internal sealed class IsNullCriteria : ColumnCriteria
     {
+        [DataMember]
         private readonly bool IsNotNull;
 
-        public IsNullCriteria(string columnName, bool isNotNull)
+        internal IsNullCriteria(string columnName, bool isNotNull)
             : base(columnName)
         {
             IsNotNull = isNotNull;

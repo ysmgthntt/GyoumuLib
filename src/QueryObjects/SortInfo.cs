@@ -1,12 +1,17 @@
-﻿namespace GyoumuLib.QueryObjects
+﻿using System.Runtime.Serialization;
+
+namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     internal sealed class SortInfo
     {
-        public readonly string ColumnName;
+        [DataMember]
+        internal readonly string ColumnName;
 
-        public readonly bool IsDescending;
+        [DataMember]
+        internal readonly bool IsDescending;
 
-        public SortInfo(string columnName, bool isDescending)
+        internal SortInfo(string columnName, bool isDescending)
         {
             QueryCommon.ValidateColumnName(columnName);
 

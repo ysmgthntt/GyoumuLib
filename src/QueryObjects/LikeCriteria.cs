@@ -1,9 +1,12 @@
-﻿using System.Text;
+﻿using System.Runtime.Serialization;
+using System.Text;
 
 namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     internal sealed class LikeCriteria : ColumnCriteria
     {
+        [DataMember]
         private readonly string Value;
 
         internal LikeCriteria(string columnName, string value)

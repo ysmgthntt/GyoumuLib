@@ -1,5 +1,8 @@
-﻿namespace GyoumuLib.QueryObjects
+﻿using System.Runtime.Serialization;
+
+namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     public abstract class CriteriaBuilderBase<TNext>
     {
         protected abstract TNext Next { get; }

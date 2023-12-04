@@ -1,27 +1,31 @@
-﻿using System.Text;
+﻿using System.Runtime.Serialization;
+using System.Text;
 
 namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     internal sealed class ComparisonCriteria : ColumnCriteria
     {
-        private readonly ComparisonOperator Operator;
+        [DataMember]
+        private readonly ComparisonOperator Op;
+        [DataMember]
         private readonly object Value;
 
-        public ComparisonCriteria(string columnName, ComparisonOperator op, object value)
+        internal ComparisonCriteria(string columnName, ComparisonOperator op, object value)
             : base(columnName)
         {
             ANE.ThrowIfNull(value);
 
-            Operator = op;
+            Op = op;
             Value = value;
         }
 
-        public ComparisonCriteria(string columnName, string op, object value)
+        internal ComparisonCriteria(string columnName, string op, object value)
             : this(columnName, ParseOperator(op), value)
         { }
 
         protected internal override void AppendCondition(StringBuilder query, QueryBuilder builder)
-            => AppendCondition(query, builder, $"{Column} {GetOperatorString(Operator)} {Value}");
+            => AppendCondition(query, builder, $"{Column} {GetOperatorString(Op)} {Value}");
 
         private const string Eq = "=";
         private const string NotEq = "<>";

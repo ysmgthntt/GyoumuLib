@@ -1,12 +1,15 @@
-﻿using System.Text;
+﻿using System.Runtime.Serialization;
+using System.Text;
 
 namespace GyoumuLib.QueryObjects
 {
+    [DataContract]
     internal sealed class InCriteria : ColumnCriteria
     {
+        [DataMember]
         private readonly object[] Values;
 
-        public InCriteria(string columnName, object[] values)
+        internal InCriteria(string columnName, object[] values)
             : base(columnName)
         {
             ANE.ThrowIfNull(values);
