@@ -4,11 +4,11 @@ namespace GyoumuLib.QueryObjects
 {
     internal static class QueryCommon
     {
-        private static readonly SearchValues<char> _invalidChars = SearchValues.Create(". +-*/,");
+        private static readonly SearchValues<char> _invalidChars = SearchValues.Create(". +-*/,\"'");
 
         public static void ValidateColumnName(string columnName, string paramName = "columnName")
         {
-            ANE.ThrowIfNullOrEmpty(columnName);
+            ANE.ThrowIfNullOrEmpty(columnName, paramName);
 
             var s = columnName.AsSpan();
             var found = s.IndexOfAny(_invalidChars);

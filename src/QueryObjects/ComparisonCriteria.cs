@@ -29,7 +29,6 @@ namespace GyoumuLib.QueryObjects
         private const string LessThanEq = "<=";
         private const string GreaterThan = ">";
         private const string GreaterThanEq = ">=";
-        private const string Like = "LIKE";
 
         private static string GetOperatorString(ComparisonOperator op)
             => op switch
@@ -40,7 +39,6 @@ namespace GyoumuLib.QueryObjects
                 ComparisonOperator.LessThanEq => LessThanEq,
                 ComparisonOperator.GreaterThan => GreaterThan,
                 ComparisonOperator.GreaterThanEq => GreaterThanEq,
-                ComparisonOperator.Like => Like,
                 _ => throw new ArgumentOutOfRangeException(nameof(op), op, null),
             };
 
@@ -63,9 +61,6 @@ namespace GyoumuLib.QueryObjects
                 case GreaterThanEq:
                     return ComparisonOperator.GreaterThanEq;
             }
-
-            if (Like.Equals(op, StringComparison.OrdinalIgnoreCase))
-                return ComparisonOperator.Like;
 
             var validOp = Enum.GetValues(typeof(ComparisonOperator)).Cast<ComparisonOperator>().Select(GetOperatorString).ToArray();
             throw new ArgumentException($"Comparison operator must be one of [{string.Join(", ", validOp)}].", nameof(op));

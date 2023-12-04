@@ -20,22 +20,18 @@
 
         public TNext Like(string columnName, string value)
         {
-            AddCriteria(new ComparisonCriteria(columnName, ComparisonOperator.Like, $"%{value}%"));
+            AddCriteria(new LikeCriteria(columnName, $"%{value}%"));
             return Next;
         }
 
         public TNext Like(string columnName, string value, bool prefixSearch, bool suffixSearch)
         {
-            if (!prefixSearch)
-                value = "%" + value;
-            if (!suffixSearch)
-                value += "%";
-
-            AddCriteria(new ComparisonCriteria(columnName, ComparisonOperator.Like, value));
+            AddCriteria(new LikeCriteria(columnName, value, prefixSearch, suffixSearch));
             return Next;
         }
 
-        public TNext Between(string columnName, object startValue, object endValue)
+        public TNext Between<TValue>(string columnName, TValue startValue, TValue endValue)
+            where TValue : notnull
         {
             AddCriteria(new BetweenCriteria(columnName, startValue, endValue));
             return Next;
@@ -53,9 +49,17 @@
             return Next;
         }
 
-        public TNext In(string columnName, params object[] values)
+        public TNext In<TValue>(string columnName, params TValue[] values)
+            where TValue : notnull
         {
-            AddCriteria(new InCriteria(columnName, values));
+            AddCriteria(new InCriteria(columnName, values.Cast<object>().ToArray()));
+            return Next;
+        }
+
+        public TNext Add(Criteria criteria)
+        {
+            ANE.ThrowIfNull(criteria);
+            AddCriteria(criteria);
             return Next;
         }
 

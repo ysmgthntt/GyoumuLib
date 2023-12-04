@@ -16,7 +16,7 @@ namespace GyoumuLib.QueryObjects
 
         protected ColumnCriteria Column => this;
 
-        protected void AppendCondition(StringBuilder query, QueryBuilder builder
+        private protected void AppendCondition(StringBuilder query, QueryBuilder builder
             , [InterpolatedStringHandlerArgument("", nameof(query), nameof(builder))] ref QueryBuilder.AppendConditionHandler _)
         { }
     }

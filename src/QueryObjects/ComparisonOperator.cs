@@ -8,6 +8,5 @@
         LessThanEq,
         GreaterThan,
         GreaterThanEq,
-        Like,
     }
 }

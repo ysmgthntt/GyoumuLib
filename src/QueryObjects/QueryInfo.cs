@@ -19,8 +19,15 @@
             {
                 if (value is not null)
                 {
-                    foreach (var columnName in value)
-                        QueryCommon.ValidateColumnName(columnName, nameof(value));
+                    try
+                    {
+                        foreach (var columnName in value)
+                            QueryCommon.ValidateColumnName(columnName, nameof(value));
+                    }
+                    catch (ArgumentNullException ex)
+                    {
+                        throw new ArgumentException(ex.Message, nameof(value), ex);
+                    }
                 }
 
                 _selectColumns = value;

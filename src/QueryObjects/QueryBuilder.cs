@@ -32,7 +32,6 @@ namespace GyoumuLib.QueryObjects
                     query.Append("SELECT ");
                     appended = true;
                 }
-                QueryCommon.ValidateColumnName(columnName);
                 AppendUniqueColumnName(query, columnName);
             }
 
