@@ -5,7 +5,11 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{684AB9AF-412D-443B-AC6A-EBCA9CC39C5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryObjects", "src\QueryObjects\QueryObjects.csproj", "{81DC066A-0CCA-4E7F-BA94-8A5706BFCC32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryObjects", "src\QueryObjects\QueryObjects.csproj", "{81DC066A-0CCA-4E7F-BA94-8A5706BFCC32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{067F3AC9-E74B-4EB6-87F6-95F275BAF905}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryObjects.Tests", "tests\QueryObjects.Tests\QueryObjects.Tests.csproj", "{DF6A71D4-2BCA-4350-86B8-F62DE6C3B4A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +21,17 @@ Global
 		{81DC066A-0CCA-4E7F-BA94-8A5706BFCC32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81DC066A-0CCA-4E7F-BA94-8A5706BFCC32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81DC066A-0CCA-4E7F-BA94-8A5706BFCC32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF6A71D4-2BCA-4350-86B8-F62DE6C3B4A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF6A71D4-2BCA-4350-86B8-F62DE6C3B4A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF6A71D4-2BCA-4350-86B8-F62DE6C3B4A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF6A71D4-2BCA-4350-86B8-F62DE6C3B4A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{81DC066A-0CCA-4E7F-BA94-8A5706BFCC32} = {684AB9AF-412D-443B-AC6A-EBCA9CC39C5B}
+		{DF6A71D4-2BCA-4350-86B8-F62DE6C3B4A8} = {067F3AC9-E74B-4EB6-87F6-95F275BAF905}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16F09272-BB87-4BA5-9FC5-2808747E52A5}
