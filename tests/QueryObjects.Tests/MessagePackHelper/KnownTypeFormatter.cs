@@ -8,7 +8,6 @@ namespace QueryObjects.Tests.MessagePackHelper
     internal sealed class KnownTypeFormatter<T> : IMessagePackFormatter<T?>
     {
         private readonly Dictionary<string, Type> _knownTypes = new();
-        private readonly ConcurrentDictionary<string, object> _formatters = new();
 
         private delegate void SerializeMethod(object formatter, ref MessagePackWriter writer, object value, MessagePackSerializerOptions options);
         private delegate object DeserializeMethod(object formatter, ref MessagePackReader reader, MessagePackSerializerOptions options);
@@ -34,13 +33,9 @@ namespace QueryObjects.Tests.MessagePackHelper
                 var typeName = type.Name;
                 writer.Write(typeName);
 
-                if (!_formatters.TryGetValue(typeName, out var formatter))
-                {
-                    formatter = options.Resolver.GetFormatterDynamic(type);
-                    if (formatter is null)
-                        throw new FormatterNotRegisteredException(typeName);
-                    _formatters.TryAdd(typeName, formatter);
-                }
+                var formatter = options.Resolver.GetFormatterDynamic(type);
+                if (formatter is null)
+                    throw new FormatterNotRegisteredException(typeName);
 
                 if (!_serializers.TryGetValue(typeName, out var serializeMethod))
                 {
@@ -83,13 +78,9 @@ namespace QueryObjects.Tests.MessagePackHelper
                 if (!_knownTypes.TryGetValue(typeName, out var type))
                     return default(T);
 
-                if (!_formatters.TryGetValue(typeName, out var formatter))
-                {
-                    formatter = options.Resolver.GetFormatterDynamic(type);
-                    if (formatter is null)
-                        throw new FormatterNotRegisteredException(typeName);
-                    _formatters.TryAdd(typeName, formatter);
-                }
+                var formatter = options.Resolver.GetFormatterDynamic(type);
+                if (formatter is null)
+                    throw new FormatterNotRegisteredException(typeName);
 
                 if (!_deserializers.TryGetValue(typeName, out var deserializeMethod))
                 {
